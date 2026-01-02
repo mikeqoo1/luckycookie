@@ -10,19 +10,28 @@ type Fortune = {
   item: string
 }
 
-const fortunes: Fortune[] = [...rawQuotes.matchAll(/社畜厭世語錄(\d+)：\s*\n([^\n]+)/g)].map(
-  ([, index, text]) => ({
-    id: `S${index.padStart(2, '0')}`,
-    tag: '社畜厭世語錄',
-    text: text.trim(),
-  }),
-)
+const fortunes: Fortune[] = [...rawQuotes.matchAll(/社畜厭世語錄(\d+)：\s*\n([^\n]+)/g)]
+  .map((match) => {
+    const index = match[1]
+    const text = match[2]
+    if (!index || !text) return null
+    return {
+      id: `S${index.padStart(2, '0')}`,
+      tag: '社畜厭世語錄',
+      text: text.trim(),
+      color: '上班灰',
+      item: '咖啡',
+    }
+  })
+  .filter((fortune): fortune is Fortune => Boolean(fortune))
 
 if (fortunes.length === 0) {
   fortunes.push({
     id: 'S01',
     tag: '社畜厭世語錄',
     text: '再努力一下，今天就快下班了。',
+    color: '上班灰',
+    item: '咖啡',
   })
 }
 
