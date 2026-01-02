@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import rawQuotes from './社畜厭世語錄.txt?raw'
 
 type Fortune = {
   id: string
@@ -9,94 +10,23 @@ type Fortune = {
   item: string
 }
 
-const fortunes: Fortune[] = [
-  {
-    id: 'A01',
-    tag: '人際運',
-    text: '今晚你說的那句玩笑會成為全場最有溫度的記憶。',
-    color: '焦糖橙',
-    item: '小卡片',
-  },
-  {
-    id: 'A02',
-    tag: '財運',
-    text: '把紅包握緊一秒，你的運氣會回握你十分。',
-    color: '金砂色',
-    item: '金屬筆',
-  },
-  {
-    id: 'A03',
-    tag: '團隊運',
-    text: '你最懂的那個人，剛好也最懂你。',
-    color: '湖水綠',
-    item: '隊徽貼紙',
-  },
-  {
-    id: 'A04',
-    tag: '創意運',
-    text: '靈感像雪花落下，別急著拍掉。',
-    color: '霧白',
-    item: '便利貼',
-  },
-  {
-    id: 'A05',
-    tag: '魅力值',
-    text: '今晚的笑容帶有磁場，會吸引好消息靠近。',
-    color: '珊瑚紅',
-    item: '香氛卡',
-  },
-  {
-    id: 'A06',
-    tag: '好運',
-    text: '機會正在排隊，你剛好被叫到號。',
-    color: '薑黃',
-    item: '幸運號碼',
-  },
-  {
-    id: 'A07',
-    tag: '勇氣',
-    text: '你想做的那件事，今天就能用一句話啟動。',
-    color: '深墨綠',
-    item: '筆記本',
-  },
-  {
-    id: 'A08',
-    tag: '驚喜',
-    text: '一個意外的邀請，會讓你多一位新盟友。',
-    color: '薄荷藍',
-    item: '聯絡資訊',
-  },
-  {
-    id: 'A09',
-    tag: '效率',
-    text: '你手上的事情會提前完成，留給你一點任性。',
-    color: '奶油黃',
-    item: '計時器',
-  },
-  {
-    id: 'A10',
-    tag: '幸福感',
-    text: '最好的位置不是舞台中央，而是你喜歡的那裡。',
-    color: '杏桃',
-    item: '合照',
-  },
-  {
-    id: 'A11',
-    tag: '突破',
-    text: '你一直想突破的關卡，今晚會用笑聲打開。',
-    color: '焦糖棕',
-    item: '禮物袋',
-  },
-  {
-    id: 'A12',
-    tag: '安定',
-    text: '好運會用很低調的方式站在你身後。',
-    color: '暖灰',
-    item: '保溫杯',
-  },
-]
+const fortunes: Fortune[] = [...rawQuotes.matchAll(/社畜厭世語錄(\d+)：\s*\n([^\n]+)/g)].map(
+  ([, index, text]) => ({
+    id: `S${index.padStart(2, '0')}`,
+    tag: '社畜厭世語錄',
+    text: text.trim(),
+  }),
+)
 
-const current = ref<Fortune>(fortunes[0])
+if (fortunes.length === 0) {
+  fortunes.push({
+    id: 'S01',
+    tag: '社畜厭世語錄',
+    text: '再努力一下，今天就快下班了。',
+  })
+}
+
+const current = ref<Fortune>(fortunes[0]!)
 const isCracking = ref(false)
 const lastIndex = ref(-1)
 
@@ -114,7 +44,7 @@ const drawFortune = () => {
   isCracking.value = true
   const nextIndex = pickIndex()
   window.setTimeout(() => {
-    current.value = fortunes[nextIndex]
+    current.value = fortunes[nextIndex]!
     lastIndex.value = nextIndex
     isCracking.value = false
   }, 720)
@@ -128,16 +58,24 @@ onMounted(() => {
 <template>
   <main class="page">
     <header class="hero">
-      <p class="eyebrow">2025 尾牙特別場</p>
-      <h1>幸運餅乾 Lucky Cookie</h1>
+      <p class="eyebrow">2026 社畜語錄</p>
+      <h1>社畜餅乾</h1>
       <p class="sub">
-        開場就有好運氣，隨機抽一張訊息，今晚主場就是你。
+        給我錢就好～～～
       </p>
     </header>
 
     <section class="fortune-area">
       <div class="cookie-stage" :class="{ cracking: isCracking }">
-        <div class="cookie">
+        <div
+          class="cookie"
+          role="button"
+          tabindex="0"
+          aria-label="抽一張新的社畜厭世語錄"
+          @click="drawFortune"
+          @keydown.enter.prevent="drawFortune"
+          @keydown.space.prevent="drawFortune"
+        >
           <div class="cookie-half left"></div>
           <div class="cookie-half right"></div>
           <div class="cookie-strip"></div>
@@ -147,7 +85,7 @@ onMounted(() => {
           <span></span>
           <span></span>
         </div>
-        <p class="cookie-tip">咔嚓一聲，新訊息掉出來</p>
+        <p class="cookie-tip">按一聲，你的心聲就出來</p>
       </div>
 
       <div class="message-card" :class="{ reveal: !isCracking }">
@@ -157,23 +95,15 @@ onMounted(() => {
         </div>
         <p class="message">{{ current.text }}</p>
         <div class="meta">
-          <div>
-            <span class="label">幸運色</span>
-            <span class="value">{{ current.color }}</span>
-          </div>
-          <div>
-            <span class="label">幸運物</span>
-            <span class="value">{{ current.item }}</span>
-          </div>
         </div>
       </div>
     </section>
 
     <div class="actions">
       <button class="draw" type="button" :disabled="isCracking" @click="drawFortune">
-        再抽一次
+        <img src="/Happy3.png" alt="再抽一次" class="draw-image" />
       </button>
-      <p class="hint">點一下，換一個新的好運提示</p>
+      <p class="hint">點一下，換一個新社畜心聲</p>
     </div>
   </main>
 </template>
@@ -232,14 +162,17 @@ onMounted(() => {
 
 .cookie {
   position: relative;
-  width: 200px;
-  height: 140px;
+  width: 220px;
+  height: 160px;
   margin: 0 auto 20px;
   display: grid;
   place-items: center;
+  background: url('/fun6.png') center / contain no-repeat;
+  cursor: pointer;
 }
 
 .cookie-half {
+  display: none;
   position: absolute;
   width: 130px;
   height: 100px;
@@ -257,6 +190,7 @@ onMounted(() => {
 }
 
 .cookie-strip {
+  display: none;
   width: 140px;
   height: 36px;
   border-radius: 12px;
@@ -369,7 +303,7 @@ onMounted(() => {
 .draw {
   border: none;
   border-radius: 999px;
-  padding: 14px 26px;
+  padding: 10px 18px;
   font-size: 1rem;
   font-weight: 600;
   color: #fff;
@@ -377,6 +311,9 @@ onMounted(() => {
   box-shadow: 0 16px 28px rgba(255, 122, 89, 0.35);
   cursor: pointer;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .draw:hover {
@@ -388,6 +325,12 @@ onMounted(() => {
   opacity: 0.6;
   cursor: default;
   transform: none;
+}
+
+.draw-image {
+  display: block;
+  width: 140px;
+  height: auto;
 }
 
 .hint {
