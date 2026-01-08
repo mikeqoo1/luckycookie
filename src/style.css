@@ -30,6 +30,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  overflow-x: hidden;
   background:
     linear-gradient(rgba(246, 239, 231, 0.72), rgba(246, 239, 231, 0.72)),
     url('/fun.jpg') 16% 22% / 280px no-repeat,
@@ -38,6 +39,26 @@ body {
     url('/fun4.jpg') 33% 82% / 300px no-repeat,
     url('/fun5.png') 67% 82% / 300px no-repeat;
   display: block;
+}
+
+@media (max-width: 640px) {
+  body {
+    background:
+      linear-gradient(rgba(246, 239, 231, 0.82), rgba(246, 239, 231, 0.82)),
+      url('/fun2.png') 50% 8% / 160px no-repeat,
+      url('/fun4.jpg') 12% 88% / 180px no-repeat,
+      url('/fun5.png') 88% 88% / 180px no-repeat;
+  }
+}
+
+@media (max-width: 420px) {
+  body {
+    background:
+      linear-gradient(rgba(246, 239, 231, 0.86), rgba(246, 239, 231, 0.86)),
+      url('/fun2.png') 50% 6% / 140px no-repeat,
+      url('/fun4.jpg') 8% 90% / 160px no-repeat,
+      url('/fun5.png') 92% 90% / 160px no-repeat;
+  }
 }
 
 #app {

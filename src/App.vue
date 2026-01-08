@@ -76,15 +76,8 @@ onMounted(() => {
 
     <section class="fortune-area">
       <div class="cookie-stage" :class="{ cracking: isCracking }">
-        <div
-          class="cookie"
-          role="button"
-          tabindex="0"
-          aria-label="抽一張新的社畜厭世語錄"
-          @click="drawFortune"
-          @keydown.enter.prevent="drawFortune"
-          @keydown.space.prevent="drawFortune"
-        >
+        <div class="cookie" role="button" tabindex="0" aria-label="抽一張新的社畜厭世語錄" @click="drawFortune"
+          @keydown.enter.prevent="drawFortune" @keydown.space.prevent="drawFortune">
           <div class="cookie-half left"></div>
           <div class="cookie-half right"></div>
           <div class="cookie-strip"></div>
@@ -108,12 +101,12 @@ onMounted(() => {
       </div>
     </section>
 
-    <div class="actions">
+    <!-- <div class="actions">
       <button class="draw" type="button" :disabled="isCracking" @click="drawFortune">
         <img src="/Happy3.png" alt="再抽一次" class="draw-image" />
       </button>
       <p class="hint">點一下，換一個新社畜心聲</p>
-    </div>
+    </div> -->
   </main>
 </template>
 
@@ -171,8 +164,8 @@ onMounted(() => {
 
 .cookie {
   position: relative;
-  width: 220px;
-  height: 160px;
+  width: min(220px, 70vw);
+  height: min(160px, 50vw);
   margin: 0 auto 20px;
   display: grid;
   place-items: center;
@@ -261,6 +254,7 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
 .tag {
@@ -278,7 +272,7 @@ onMounted(() => {
 }
 
 .message {
-  font-size: 1.3rem;
+  font-size: clamp(1.05rem, 2.8vw, 1.3rem);
   margin: 0;
   line-height: 1.6;
 }
@@ -338,7 +332,7 @@ onMounted(() => {
 
 .draw-image {
   display: block;
-  width: 140px;
+  width: min(140px, 50vw);
   height: auto;
 }
 
@@ -363,9 +357,11 @@ onMounted(() => {
   0% {
     transform: rotate(-18deg) translateX(-28px);
   }
+
   40% {
     transform: rotate(-26deg) translate(-44px, -10px);
   }
+
   100% {
     transform: rotate(-18deg) translateX(-28px);
   }
@@ -375,9 +371,11 @@ onMounted(() => {
   0% {
     transform: rotate(16deg) translateX(28px);
   }
+
   40% {
     transform: rotate(26deg) translate(44px, -10px);
   }
+
   100% {
     transform: rotate(16deg) translateX(28px);
   }
@@ -387,9 +385,11 @@ onMounted(() => {
   0% {
     transform: translateY(0);
   }
+
   40% {
     transform: translateY(-10px);
   }
+
   100% {
     transform: translateY(0);
   }
@@ -406,6 +406,33 @@ onMounted(() => {
 
   .draw {
     width: 100%;
+  }
+
+  .hero {
+    text-align: center;
+  }
+
+  .sub {
+    margin: 0 auto;
+  }
+
+  .message-top {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .message-card {
+    padding: 22px;
+  }
+}
+
+@media (max-width: 420px) {
+  .page {
+    padding: 40px 14px 54px;
+  }
+
+  .cookie-stage {
+    padding: 24px 18px 32px;
   }
 }
 </style>
