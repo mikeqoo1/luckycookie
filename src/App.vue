@@ -17,7 +17,7 @@ const fortunes: Fortune[] = [...rawQuotes.matchAll(/社畜厭世語錄(\d+)：\s
     if (!index || !text) return null
     return {
       id: `S${index.padStart(2, '0')}`,
-      tag: '社畜厭世語錄',
+      tag: '尾牙正能量',
       text: text.trim(),
       color: '上班灰',
       item: '咖啡',
@@ -28,7 +28,7 @@ const fortunes: Fortune[] = [...rawQuotes.matchAll(/社畜厭世語錄(\d+)：\s
 if (fortunes.length === 0) {
   fortunes.push({
     id: 'S01',
-    tag: '社畜厭世語錄',
+    tag: '尾牙正能量',
     text: '再努力一下，今天就快下班了。',
     color: '上班灰',
     item: '咖啡',
@@ -67,8 +67,8 @@ onMounted(() => {
 <template>
   <main class="page">
     <header class="hero">
-      <p class="eyebrow">2026 社畜語錄</p>
-      <h1>社畜餅乾</h1>
+      <p class="eyebrow">2026 阿康尾牙</p>
+      <h1>尾牙能量</h1>
       <p class="sub">
         給我錢就好～～～
       </p>
@@ -76,7 +76,7 @@ onMounted(() => {
 
     <section class="fortune-area">
       <div class="cookie-stage" :class="{ cracking: isCracking }">
-        <div class="cookie" role="button" tabindex="0" aria-label="抽一張新的社畜厭世語錄" @click="drawFortune"
+        <div class="cookie" role="button" tabindex="0" aria-label="抽一張新的尾牙語錄" @click="drawFortune"
           @keydown.enter.prevent="drawFortune" @keydown.space.prevent="drawFortune">
           <div class="cookie-half left"></div>
           <div class="cookie-half right"></div>
@@ -107,6 +107,7 @@ onMounted(() => {
       </button>
       <p class="hint">點一下，換一個新社畜心聲</p>
     </div> -->
+    <div class="author">作者：資訊部</div>
   </main>
 </template>
 
@@ -341,6 +342,15 @@ onMounted(() => {
   font-size: 0.9rem;
 }
 
+.author {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
 .cookie-stage.cracking .cookie-half.left {
   animation: crack-left 0.7s ease;
 }
@@ -396,6 +406,12 @@ onMounted(() => {
 }
 
 @media (max-width: 720px) {
+  .author {
+    right: 14px;
+    bottom: 14px;
+    font-size: 0.8rem;
+  }
+
   .page {
     padding: 48px 16px 60px;
   }
