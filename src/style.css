@@ -1,23 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600&family=Playfair+Display:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Noto+Sans+TC:wght@400;600&display=swap');
 
 :root {
-  font-family: 'Noto Sans TC', sans-serif;
-  line-height: 1.6;
+  font-family: 'IBM Plex Mono', 'Noto Sans TC', monospace;
+  line-height: 1.5;
   font-weight: 400;
-  color: #1d1b1a;
-  background-color: #f6efe7;
+  color: #e2e8f0;
+  background-color: #0f172a;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  --font-display: 'Playfair Display', 'Noto Sans TC', serif;
-  --accent: #ff7a59;
-  --accent-2: #1f8b7c;
-  --muted: rgba(29, 27, 26, 0.65);
-  --surface: rgba(255, 255, 255, 0.75);
-  --shadow-soft: 0 18px 40px rgba(120, 78, 34, 0.15);
-  --shadow-strong: 0 30px 60px rgba(120, 78, 34, 0.2);
 }
 
 *,
@@ -30,35 +22,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  overflow-x: hidden;
-  background:
-    linear-gradient(rgba(246, 239, 231, 0.72), rgba(246, 239, 231, 0.72)),
-    url('/fun.jpg') 16% 22% / 280px no-repeat,
-    url('/fun2.png') 50% 18% / 280px no-repeat,
-    url('/fun3.png') 84% 22% / 280px no-repeat,
-    url('/fun4.jpg') 33% 82% / 300px no-repeat,
-    url('/fun5.png') 67% 82% / 300px no-repeat;
-  display: block;
-}
-
-@media (max-width: 640px) {
-  body {
-    background:
-      linear-gradient(rgba(246, 239, 231, 0.82), rgba(246, 239, 231, 0.82)),
-      url('/fun2.png') 50% 8% / 160px no-repeat,
-      url('/fun4.jpg') 12% 88% / 180px no-repeat,
-      url('/fun5.png') 88% 88% / 180px no-repeat;
-  }
-}
-
-@media (max-width: 420px) {
-  body {
-    background:
-      linear-gradient(rgba(246, 239, 231, 0.86), rgba(246, 239, 231, 0.86)),
-      url('/fun2.png') 50% 6% / 140px no-repeat,
-      url('/fun4.jpg') 8% 90% / 160px no-repeat,
-      url('/fun5.png') 92% 90% / 160px no-repeat;
-  }
+  background-color: #0f172a;
 }
 
 #app {
